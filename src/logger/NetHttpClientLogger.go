@@ -46,7 +46,8 @@ func (bcl *netHttpClientLogger) Get(url string) (resp *http.Response, err error)
 	return getResp, getErr
 }
 
-func (bcl *netHttpClientLogger) Post(url string) (resp *http.Response, err error) {
+//clean up contentType string and body io.Reader Monday
+func (bcl *netHttpClientLogger) Post(url, contentType string, body io.Reader) (resp *http.Response, err error) {
 	// capture the response or error
 	postResp, postErr := bcl.Client.Get(url)
 
@@ -77,6 +78,11 @@ func (bcl *netHttpClientLogger) Post(url string) (resp *http.Response, err error
 	}
 
 	return postResp, getErr
+}
+
+// do we need a PostForm?? Probably not.
+func (c *Client) PostForm(url string, data url.Values) (resp *http.Response, err error){
+
 }
 
 func (bcl *netHttpClientLogger) Delete(url string) (resp *http.Response, err error) {
